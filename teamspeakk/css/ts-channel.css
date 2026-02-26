@@ -1,0 +1,125 @@
+/* TeamSpeak 频道管理页面样式 */
+
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    font-family: "HarmonyOS Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.navbar-custom {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.container-custom {
+    max-width: 900px;
+    margin-top: 2rem;
+    padding: 0 1rem;
+}
+
+.card-custom {
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    margin-bottom: 2rem;
+}
+
+.card-header-custom {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 15px 15px 0 0 !important;
+    padding: 1.5rem;
+    border: none;
+}
+
+.form-group-custom {
+    margin-bottom: 1.5rem;
+}
+
+.btn-primary-custom {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-primary-custom:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(102, 126, 234, 0.4);
+    color: white;
+}
+
+.channel-item {
+    background: #f8f9fa;
+    border-left: 4px solid #667eea;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.channel-info {
+    flex: 1;
+}
+
+.channel-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.channel-detail {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.badge-custom {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+}
+
+.loading-spinner {
+    display: none;
+    text-align: center;
+    padding: 1rem;
+}
+
+.alert-custom {
+    border-radius: 10px;
+    border: none;
+}
+
+.back-link {
+    color: white;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.back-link:hover {
+    color: #f0f0f0;
+}
+
+@media (max-width: 768px) {
+    .container-custom {
+        margin-top: 1rem;
+    }
+
+    .channel-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .badge-custom {
+        margin-top: 0.5rem;
+    }
+}

@@ -111,7 +111,7 @@
 
                 <h1 class="welcome-title" style="font-size: 4rem;">Alec-Apu</h1>
                 <p class="welcome-subtitle">点击进入，享受音乐</p> 
-                <button class="welcome-button" id="enter-site" onclick="startApplication()">进入主页</button>
+                <button class="welcome-button" id="enter-site">进入主页</button>
 
             </div>
 
@@ -159,7 +159,7 @@
                             </div>
                             <!--社交链接-->
                             <div class="social" id="social">
-                                <a href="https://github.com/Alec-Apu" class="link" id="github" style="margin-left: 4px"
+                                <a href="https://github.com/Alec-Apu/apuhomepage" class="link" id="github" style="margin-left: 4px"
                                     target="_blank">
                                     <i class="fa-brands fa-github"></i>
                                 </a>
@@ -268,7 +268,7 @@
                                         </a>
                                     </div>
                                     <div class="col 2">
-                                        <a id="link-url-2" href="https://teamspeak.com/" target="_blank">
+                                        <a id="link-url-2" href="https://files.teamspeak-services.com/releases/client/3.6.2/TeamSpeak3-Client-win64-3.6.2.exe" target="_blank">
                                             <div class="link-card cards">
                                                 <i id="link-icon-2" class="fa-solid fa-cloud"></i>
                                                 <span class="link-name" id="link-name-2">teamspeak下载</span>
@@ -287,10 +287,10 @@
                                 <!--第二组-->
                                 <div class="row" style="margin-top: 1.5rem;">
                                     <div class="col">
-                                        <a id="link-url-4" href="https://apupu.top/" target="_blank">
+                                        <a id="link-url-4" href="./Bitmap/" target="_blank">
                                             <div class="link-card cards">
                                                 <i id="link-icon-4" class="fa-solid fa-compass"></i>
-                                                <span class="link-name" id="link-name-4">起始页</span>
+                                                <span class="link-name" id="link-name-4">点阵图转换</span>
                                             </div>
                                         </a>
                                     </div>
@@ -380,7 +380,7 @@
                             </a>
                         </div>
                         <div class="col">
-                            <a href="https://github.com/Alec-Apu" target="_blank">
+                            <a href="https://github.com/Alec-Apu/apuhomepage" target="_blank">
                                 <div class="link-card cards">
                                     <span class="link-name">github</span>
                                 </div>
@@ -424,7 +424,7 @@
                                 <span class="img-title-big" id="logo-title-other">AlecApu</span>
                                 <span class="img-text" id="logo-title-other-small">.top</span><br />
                                 <span class="img-text">&nbsp;v&nbsp;3.3</span>
-                                <a href="https://github.com/Alec-Apu/alec" target="_blank">
+                                <a href="https://github.com/Alec-Apu/apuhomepage" target="_blank">
                                     <i class="fa-brands fa-github"></i>
                                 </a>
                             </div>
@@ -484,6 +484,15 @@
                                                 <span class="uptext">
                                                     <i class="fa-solid fa-circle-plus"></i>&nbsp; 
                                                     2026/01/28<br>
+                                                    新增ts3点击下载<br>
+                                                    新增新增ts频道管理(功能待开发)<br>
+                                                    新增点阵图转换<br>
+                                                    优化音乐播放器<br>
+                                                    歌单更新<br>
+                                                </span>
+                                                <span class="uptext">
+                                                    <i class="fa-solid fa-circle-plus"></i>&nbsp; 
+                                                    2026/01/28<br>
                                                     新增底栏歌词<br>
                                                     新增欢迎界面<br>
                                                     新增交互自动播放音乐<br>
@@ -518,6 +527,10 @@
                         </div>
                         <!--Aplayer-->
                         <div class="box-right">
+                            <div class="song-request" id="song-request">
+                                <input id="songInput" type="text" placeholder="输入歌名" autocomplete="off">
+                                <button id="requestBtn" type="button">点歌</button>
+                            </div>
                             <div id="aplayer">
                                 <span>音乐播放器加载失败</span>
                             </div>
@@ -559,9 +572,9 @@
     </noscript>
     <!-- JS -->
     <script type="text/javascript" src="./js/main.js"></script>
+    <script type="text/javascript" src="./js/js.cookie.js"></script>
     <script type="text/javascript" src="./js/set.js"></script>
     <script type="text/javascript" src="./js/time.js"></script>
-    <script type="text/javascript" src="./js/js.cookie.js"></script>
     <script type="text/javascript" src="./js/runtime.js"></script>
     <script type="text/javascript"
         src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-y/bootstrap/5.1.0/js/bootstrap.min.js">

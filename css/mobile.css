@@ -237,6 +237,22 @@
         max-width: 100% !important;
     }
 
+    .song-request {
+        margin-right: 0 !important;
+        width: 100% !important;
+        gap: 6px;
+    }
+
+    #songInput {
+        min-width: 0;
+        font-size: 0.95rem;
+    }
+
+    #requestBtn {
+        white-space: nowrap;
+        padding: 0 10px;
+    }
+
     #music-name {
         font-size: 1.05rem;
     }

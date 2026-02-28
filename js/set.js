@@ -11,14 +11,43 @@ function setBgImg(bg_img) {
   return false;
 }
 
+function getPageDepth() {
+  const pathname = (window.location.pathname || "").replace(/\/+$/, "");
+  const parts = pathname.split("/").filter(Boolean);
+  if (parts.length === 0) {
+    return 0;
+  }
+  return parts[parts.length - 1].includes(".") ? parts.length - 1 : parts.length;
+}
+
+function getAssetUrl(relativePath) {
+  return new URL(relativePath, window.location.href).href;
+}
+
+function getBgAsset(fileName) {
+  const depth = getPageDepth();
+  const prefix = depth === 0 ? "./" : "../".repeat(depth);
+  return getAssetUrl(`${prefix}img/${fileName}`);
+}
+
+function isHomepage() {
+  const pathname = (window.location.pathname || "").replace(/\/+$/, "");
+  return pathname === "" || pathname === "/" || pathname.endsWith("/index.html");
+}
+
 // 获取背景图片 Cookies
 function getBgImg() {
   let bg_img_local = Cookies.get("bg_img");
   if (bg_img_local && bg_img_local !== "{}") {
-    return JSON.parse(bg_img_local);
+    try {
+      return JSON.parse(bg_img_local);
+    } catch (error) {
+      setBgImg(bg_img_preinstall);
+      return { ...bg_img_preinstall };
+    }
   } else {
     setBgImg(bg_img_preinstall);
-    return bg_img_preinstall;
+    return { ...bg_img_preinstall };
   }
 }
 
@@ -47,15 +76,17 @@ function setBgImgInit() {
       return;
     }
     $this.data("bgFallback", true);
-    $this.attr("src", "./img/background1.png");
+    $this.attr("src", getBgAsset("background1.png"));
   });
 
   switch (bg_img["type"]) {
     case "1":
-      $("#bg").attr(
-        "src",
-        `./img/background${1 + ~~(Math.random() * 1)}.webp`
-      ); //随机默认壁纸
+      if (!bg_img.defaultSrc || isHomepage()) {
+        const randomIndex = 1 + Math.floor(Math.random() * 7);
+        bg_img.defaultSrc = getBgAsset(`background${randomIndex}.png`);
+        setBgImg(bg_img);
+      }
+      $("#bg").attr("src", bg_img.defaultSrc);
       break;
     case "2":
       $("#bg").attr("src", bg_img_preinstall[2]); //必应每日
@@ -77,6 +108,12 @@ $(document).ready(function () {
     let type = $(this).val();
     let bg_img = getBgImg();
     bg_img["type"] = type;
+    if (type === "1") {
+      const randomIndex = 1 + Math.floor(Math.random() * 7);
+      bg_img.defaultSrc = getBgAsset(`background${randomIndex}.png`);
+    } else {
+      delete bg_img.defaultSrc;
+    }
     iziToast.show({
       icon: "fa-solid fa-image",
       timeout: 2500,

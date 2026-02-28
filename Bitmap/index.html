@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="将图片转换为盲文点阵字符艺术 - Image to Braille">
+	<title>点阵图转换器 - Alec-Apu</title>
+	
+	<!-- HarmonyOS Sans 字体（B站 CDN） -->
+	<link rel="stylesheet" href="https://s1.hdslb.com/bfs/static/jinkela/long/font/regular.css" />
+	
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+	
+	<link rel="stylesheet" href="style.css">
+	<link rel="icon" href="../favicon.ico">
+	
+	<!-- jQuery -->
+	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<script src="braille.js"></script>
+    <script src="dithering.js"></script>
+    <script src="main.js"></script>
+</head>
+<body>
+	<!-- 自定义鼠标指针 -->
+	<div id="g-pointer-1"></div>
+	<div id="g-pointer-2"></div>
+	
+	<!-- 背景图片 -->
+	<div class="bg-all">
+		<img id="bg" onerror="this.classList.add('error');"></img>
+		<div class="cover"></div>
+	</div>
+	 
+	
+	<div class="main-container">
+		<!-- 返回主页按钮 -->
+		<a href="../index.html" class="back-home" title="返回主页">
+			<i class="fa-solid fa-house"></i>
+		</a>
+		
+		<div class="content-wrapper">
+			<!-- 左侧 - 输出区域 -->
+			<div class="output-panel glass-card">
+				<div class="panel-header">
+					<i class="fa-solid fa-image"></i>
+					<h2>点阵图转换器</h2>
+				</div>
+				<textarea id="text" readonly placeholder="选择一张图片开始转换..."></textarea>
+			</div>
+			
+			<!-- 右侧 - 控制面板 -->
+			<div id="options" class="glass-card">
+				<div class="panel-header">
+					<i class="fa-solid fa-sliders"></i>
+					<h3>设置选项</h3>
+				</div>
+				
+				<!-- 文件上传 -->
+				<div class="option-item">
+					<label class="file-upload-btn">
+						<i class="fa-solid fa-upload"></i>
+						<span>选择图片</span>
+						<input id="file" type="file" accept="image/*">
+					</label>
+				</div>
+
+				<!-- 宽度设置 -->
+				<div class="option-item">
+					<label>
+						<i class="fa-solid fa-arrows-left-right"></i>
+						宽度 (字符)
+					</label>
+					<input type="number" min="2" value="50" step="2" max="500" id="width">
+				</div>
+				
+				<!-- 灰度模式 -->
+				<div class="option-item">
+					<label>
+						<i class="fa-solid fa-palette"></i>
+						灰度模式
+					</label>
+					<select id="greyscale_mode">
+						<option value="luminance">亮度</option>
+						<option value="lightness">明度</option>
+						<option value="average">平均值</option>
+						<option value="value">色值</option>
+					</select>
+				</div>
+
+				<!-- 开关选项 -->
+				<div class="option-switches">
+					<div class="switch-item">
+						<input type="checkbox" id="darktheme" checked>
+						<label for="darktheme">
+							<i class="fa-solid fa-moon"></i>
+							深色模式
+						</label>
+					</div>
+					
+					<div class="switch-item">
+						<input type="checkbox" id="inverted">
+						<label for="inverted">
+							<i class="fa-solid fa-adjust"></i>
+							反色
+						</label>
+					</div>
+
+					<div class="switch-item">
+						<input type="checkbox" id="dithering">
+						<label for="dithering">
+							<i class="fa-solid fa-border-all"></i>
+							像素抖动
+						</label>
+					</div>
+
+					<div class="switch-item">
+						<input type="checkbox" id="monospace">
+						<label for="monospace">
+							<i class="fa-solid fa-font"></i>
+							等宽字体
+						</label>
+					</div>
+				</div>
+
+				<!-- 操作按钮 -->
+				<div class="option-item">
+					<button id="clipboard" class="primary-btn">
+						<i class="fa-solid fa-copy"></i>
+						复制到剪贴板
+					</button>
+				</div>
+				
+				<!-- 统计信息 -->
+				<div class="stats-info">
+					<i class="fa-solid fa-chart-simple"></i>
+					总字符数: <span id="charcount">0</span>
+				</div>
+				
+				<!-- 底部链接 -->
+				<div class="footer-link">
+					<a href="https://github.com/505e06b2/Image-to-Braille" target="_blank">
+						<i class="fa-brands fa-github"></i>
+						GitHub 原项目
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 鼠标跟随脚本 -->
+	<script>
+		// 自定义鼠标指针
+		const pointer2 = document.getElementById('g-pointer-2');
+		
+		document.addEventListener('mousemove', (e) => {
+			pointer2.style.left = e.clientX + 'px';
+			pointer2.style.top = e.clientY + 'px';
+		});
+		
+		// 页面加载动画
+		window.addEventListener('load', function() {
+			setTimeout(function() {
+				document.querySelector('.main-container').style.opacity = '1';
+				document.querySelector('.main-container').style.transform = 'scale(1)';
+			}, 100);
+		});
+	</script>
+	<script src="../js/js.cookie.js"></script>
+	<script src="../js/set.js"></script>
+</body>
+</html>

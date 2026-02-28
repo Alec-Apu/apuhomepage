@@ -51,17 +51,33 @@ npm install
 2. 填入 TeamSpeak 服务器配置：
 
 ```env
-# TeamSpeak 查询账号配置
-TS_HOST=alecapu.top
-TS_QUERY_PORT=10011
-TS_USERNAME=your_query_username
-TS_PASSWORD=your_query_password
-TS_NICKNAME=ChannelBot
-TS_SERVER_PORT=9987
+# ====== TeamSpeak Query API 配置 ======
+TS_HOST=alecapu.top            # TS 主机域名或 IP，可换成公网 IP
+TS_QUERY_PORT=10011           # Query 服务端口
+TS_USERNAME=api_user           # 最小权限专用 Query 帐号
+TS_PASSWORD=lzrCWnsr           # 该帐号密码
+TS_NICKNAME=ChannelBot        # Bot 登录后的名称，可变
+TS_SERVER_PORT=9987           # 虚拟服务器端口
 
-# NodeJS 服务器端口
-PORT=3001
+# ====== NodeJS 后端 ======
+# 后端监听端口，可根据服务器配置修改。例如当前使用 13344
+PORT=13344
 ```
+
+> **使用专用 Query 账号**
+> 
+> 为了安全，请不要使用 `serveradmin` 等权限过大的账号。只需在 TS 服务器上创建 **一个专用 ServerQuery 帐号**，授予创建永久频道及子频道的最小权限即可。
+> 上述示例中的 `api_user` / `lzrCWnsr` 只是占位，部署时由管理员创建的凭据应写入 `.env`。
+> 
+> 如果要创建或查看 Query 帐号，可用如下 ServerQuery 命令：
+> ```text
+> clientcreate client_login_name=api_user client_login_password=lzrCWnsr
+> ```
+> 同时，将该用户加入权限组（如 sgid=15），使其具有频道创建权限。不要赋予删除频道、踢人、管理用户等多余权限。
+> 
+> 该 `.env` 文件应仅保存在后端服务器，且务必加入 `.gitignore`。
+
+
 
 ### 启动服务器
 
@@ -73,7 +89,7 @@ npm run dev
 npm start
 ```
 
-服务器将运行在 `http://127.0.0.1:3001`
+服务器将运行在 `http://127.0.0.1:13344`
 
 ## 📡 API 端点
 

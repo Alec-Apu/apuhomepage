@@ -1,13 +1,76 @@
 let server = "tencent"; //netease: 网易云音乐; tencent: QQ音乐; kugou: 酷狗音乐; xiami: 虾米; kuwo: 酷我
 let type = "playlist"; //song: 单曲; playlist: 歌单; album: 唱片
 let id = "7764944594"; //封面 ID / 单曲 ID / 歌单 ID
+let ap = null;
+const metingApiBase = "https://kennyz.cn:11444/meting/";
+
+async function requestSong(keyword) {
+    if (!keyword) return;
+    if (!ap) {
+        iziToast.info({
+            timeout: 2500,
+            icon: "fa-solid fa-music",
+            displayMode: 'replace',
+            message: '播放器还在加载，请稍后再试'
+        });
+        return;
+    }
+
+    try {
+        const response = await fetch(
+            `${metingApiBase}?server=tencent&type=search&s=${encodeURIComponent(keyword)}`
+        );
+        const data = await response.json();
+
+        if (!data || data.length === 0) {
+            alert("未找到歌曲");
+            return;
+        }
+
+        const song = data[0];
+        let playableSong = song;
+
+        if (!playableSong.url && playableSong.id) {
+            const songDetailResp = await fetch(
+                `${metingApiBase}?server=tencent&type=song&id=${encodeURIComponent(playableSong.id)}`
+            );
+            const songDetail = await songDetailResp.json();
+            if (songDetail && songDetail.length > 0) {
+                playableSong = songDetail[0];
+            }
+        }
+
+        const artist = Array.isArray(playableSong.artist)
+            ? playableSong.artist.join("/")
+            : (playableSong.artist || "未知歌手");
+
+        if (!playableSong.url) {
+            alert("该歌曲暂无可播放链接");
+            return;
+        }
+
+        ap.list.clear();
+        ap.list.add([{
+            name: playableSong.name || keyword,
+            artist: artist,
+            url: playableSong.url,
+            cover: playableSong.pic || playableSong.cover || "",
+            lrc: playableSong.lrc || ""
+        }]);
+
+        ap.play();
+    } catch (error) {
+        console.error("点歌失败:", error);
+        alert("点歌失败");
+    }
+}
 
 $.ajax({
-    url: "https://kennyz.cn:11444/meting/?server=" + server + "&type=" + type + "&id=" + id,
+    url: metingApiBase + "?server=" + server + "&type=" + type + "&id=" + id,
     type: "GET",
     dataType: "JSON",
     success: function (data) {
-        const ap = new APlayer({
+        ap = new APlayer({
             container: document.getElementById('aplayer'),
             order: 'list',
             preload: 'auto',
@@ -19,6 +82,22 @@ $.ajax({
         });
         // 将播放器实例暴露到全局，方便页面其它代码（如全局点击监听）调用
         window.ap = ap;
+
+        const requestBtn = document.getElementById("requestBtn");
+        const songInput = document.getElementById("songInput");
+        if (requestBtn && songInput) {
+            requestBtn.addEventListener("click", () => {
+                const keyword = songInput.value.trim();
+                requestSong(keyword);
+            });
+
+            songInput.addEventListener("keydown", (e) => {
+                if (e.key === "Enter") {
+                    const keyword = songInput.value.trim();
+                    requestSong(keyword);
+                }
+            });
+        }
 
         /* 底栏歌词 */
         setInterval(function () {
@@ -140,7 +219,7 @@ $.ajax({
 let firstPlay = false;
 
 function enableMusicAutoPlay() {
-    if (!firstPlay && typeof ap !== 'undefined' && ap !== null) {
+    if (!firstPlay && ap) {
         ap.play();   // 触发 APlayer 播放
         firstPlay = true;
 

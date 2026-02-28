@@ -41,19 +41,8 @@ body.addEventListener("mousemove", (e) => {
 window.addEventListener(
   "load",
   function () {
-    //随机背景图
-    const backgroundImages = [
-      "./img/background1.png",
-      "./img/background2.png",
-      "./img/background3.png",
-      "./img/background4.png",
-      "./img/background5.png",
-      "./img/background6.png",
-      "./img/background7.png",
-    ];
-    const randomBg = backgroundImages[Math.floor(Math.random() * backgroundImages.length)];
+    // 背景图由 set.js 统一控制
     $("#bg").removeClass("error");
-    $("#bg").attr("src", randomBg);
     //载入动画
     $("#loading-box").attr("class", "loaded");
     

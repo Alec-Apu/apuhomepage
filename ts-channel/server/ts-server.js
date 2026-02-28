@@ -4,7 +4,7 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
-const { TeamSpeakClient } = require('ts3-nodejs-library');
+const { TeamSpeak } = require('ts3-nodejs-library');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -23,23 +23,26 @@ const TS_CONFIG = {
     serverPort: parseInt(process.env.TS_SERVER_PORT || '9987'),
 };
 
-// TS3 客户端单例
+// TS3 客户端实例
 let tsClient = null;
 
 // 初始化 TS3 连接
 async function initTeamSpeak() {
     try {
-        tsClient = new TeamSpeakClient(TS_CONFIG);
-        await tsClient.connect();
+        // 使用官方推荐的 connect() 工厂方法，自动处理登录和选择虚拟服务器
+        tsClient = await TeamSpeak.connect({
+            host: TS_CONFIG.host,
+            queryport: TS_CONFIG.queryPort,
+            serverport: TS_CONFIG.serverPort,
+            username: TS_CONFIG.username,
+            password: TS_CONFIG.password,
+            nickname: TS_CONFIG.nickname,
+        });
         console.log('[TS3] 已连接到 TeamSpeak 服务器');
-        
-        // 选择虚拟服务器
-        await tsClient.selectVirtualServer(TS_CONFIG.serverPort);
-        console.log('[TS3] 已选择虚拟服务器');
-        
         return true;
     } catch (error) {
-        console.error('[TS3] 连接失败:', error.message);
+        console.error('[TS3] 连接失败:', error && error.message);
+        console.error(error);
         return false;
     }
 }
@@ -48,7 +51,9 @@ async function initTeamSpeak() {
 async function reconnectTeamSpeak() {
     try {
         if (tsClient) {
-            await tsClient.close();
+            // 使用库内置的 reconnect 方法，保留上下文
+            await tsClient.reconnect();
+            return true;
         }
         return await initTeamSpeak();
     } catch (error) {
@@ -67,6 +72,15 @@ async function getTeamSpeakClient() {
 }
 
 // ============== API 路由 ==============
+
+// 基础 API 根，方便直接访问
+app.get('/api', (req, res) => {
+    res.json({
+        status: 'ok',
+        message: 'TeamSpeak 频道管理 API',
+        version: '1.0.0',
+    });
+});
 
 // 健康检查
 app.get('/api/health', (req, res) => {
@@ -258,7 +272,7 @@ app.listen(PORT, async () => {
 process.on('SIGTERM', async () => {
     console.log('[服务器] 正在关闭...');
     if (tsClient) {
-        await tsClient.close();
+        await tsClient.quit();
     }
     process.exit(0);
 });

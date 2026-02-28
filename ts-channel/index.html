@@ -29,6 +29,11 @@
     <link rel="icon" href="../favicon.ico">
 </head>
 <body>
+    <div class="bg-all">
+        <img id="bg" onerror="this.classList.add('error');"></img>
+        <div class="cover"></div>
+    </div>
+
     <!-- 导航栏 -->
     <nav class="navbar navbar-custom sticky-top">
         <div class="container-fluid px-4">
@@ -64,6 +69,14 @@
 
         <!-- 右侧内容 -->
         <div class="ts-content">
+            <div class="dev-notice" role="alert">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <div class="dev-notice-text">
+                    <strong>该项目仍在开发中，暂未完成</strong>
+                    <span>当前功能不稳定、数据可能异常，不能正式使用。</span>
+                </div>
+            </div>
+
             <!-- 创建频道区域 -->
             <section id="create-section" class="tab-content active">
                 <div class="section-header">
@@ -206,5 +219,7 @@
 
     <!-- TS 频道管理脚本 -->
     <script src="./js/channel.js"></script>
+    <script src="../js/js.cookie.js"></script>
+    <script src="../js/set.js"></script>
 </body>
 </html>

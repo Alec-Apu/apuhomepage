@@ -32,7 +32,8 @@ function getBgAsset(fileName) {
 
 function isHomepage() {
   const pathname = (window.location.pathname || "").replace(/\/+$/, "");
-  return pathname === "" || pathname === "/" || pathname.endsWith("/index.html");
+  // 只匹配真正的根主页，避免错误地把 ts-guide/index.html 等子页当成主页
+  return pathname === "" || pathname === "/" || pathname === "/index.html";
 }
 
 // 获取背景图片 Cookies

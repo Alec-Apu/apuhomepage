@@ -521,6 +521,13 @@ npx http-server -p 8080
 
 ## 📝 更新日志
 
+### v2.1.0 (2026-03-11)
+- ✨ 新增 TeamSpeak 新手教程页（`/ts-guide/`），补充从下载到连接的完整步骤
+- 🌐 新增 TS3 简体中文语言包下载入口与安装说明
+- 📚 新增“谱谱大家庭”创建永久频道教程与频道管理规则提示
+- 🎨 优化教程页文案，降低新手理解门槛
+- 🔗 主页 `ts教程` 卡片图标替换为 TeamSpeak 品牌图标
+
 ### v2.0.0 (2026-02-28)
 - ✨ 新增 Bitmap 点阵图转换工具
 - ✨ 新增灯笼装饰效果
@@ -545,7 +552,7 @@ npx http-server -p 8080
 ```
 MIT License
 
-Copyright (c) 2024 Alec-Apu
+Copyright (c) 2024 ,Alec-Apu,imsyy
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

@@ -4,7 +4,7 @@
 简单的小主页，基于imsyy/home，全新升级。
 </p>
 
-![Alec 的个人主页](/screenshots/main.jpg)
+![Alec 的个人主页](/screenshots/main.png)
 
 
 

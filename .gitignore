@@ -1,5 +1,17 @@
-# Logs
-logs
+# --- Dependencies ---
+node_modules/
+
+# --- Build output ---
+dist/
+dist-ssr/
+
+# --- Environment & secrets ---
+.env
+.env.*
+!.env.example
+
+# --- Logs ---
+logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
@@ -7,22 +19,50 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
+# --- OS generated files ---
 .DS_Store
-dist
-dist-ssr
-coverage
-*.local
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
 
-/cypress/videos/
-/cypress/screenshots/
-
-# Editor directories and files
+# --- Editor & IDE ---
 .vscode/*
 !.vscode/extensions.json
-.idea
+.idea/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+*.swp
+*.swo
+*~
+*.tmproj
+.history/
+*.code-workspace
+
+# --- Claude AI ---
+.claude/
+
+# --- Temp & cache ---
+*.tmp
+*.temp
+.cache/
+.temp/
+*.tgz
+*.tar.gz
+
+# --- Testing ---
+coverage/
+.nyc_output/
+test-results/
+playwright-report/
+
+# --- Misc ---
+*.local
+*.orig
+*.bak

@@ -1,0 +1,88 @@
+#first-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    transition: opacity .6s ease, visibility .6s ease;
+    overflow: hidden
+}
+
+#first-screen.hidden {
+    opacity: 0;
+    visibility: hidden
+}
+
+.first-screen-content {
+    text-align: center;
+    color: #fff;
+    position: relative;
+    z-index: 2
+}
+
+#first-screen::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.611);
+    z-index: 1;
+    pointer-events: none;
+    transition: background .25s ease
+}
+
+.first-screen-title {
+    font-size: 3rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+    font-family: 'Pacifico-Regular', cursive !important
+}
+
+.first-screen-subtitle {
+    font-size: 1rem;
+    margin-bottom: 2.5rem;
+    opacity: .9;
+    letter-spacing: 1px
+}
+
+.first-screen-button {
+    background: linear-gradient(rgb(0 0 0 / 5%), rgb(0 0 0 / 5%)) padding-box, linear-gradient(to right, rgba(255, 255, 255, .02) 0%, transparent 50%, rgba(255, 255, 255, .08) 100%) border-box;
+    backdrop-filter: blur(4px);
+    padding: 17px 42px;
+    border-radius: 32px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, .1), inset 0 1px 0 rgba(255, 255, 255, .2);
+    -webkit-background-clip: padding-box, border-box;
+    background-clip: padding-box, border-box;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: all .25s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    max-width: 400px
+}
+
+.first-screen-button:hover {
+    background: rgb(255 255 255 / 30%);
+    transition: .35s;
+    transform: translateY(-2px)
+}
+
+.first-screen-button:active {
+    transform: translateY(0)
+}
+
+#first-screen-footer {
+    z-index: 10002;
+    display: none
+}

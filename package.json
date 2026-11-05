@@ -1,0 +1,29 @@
+{
+  "name": "nsvnewweb-vue",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js",
+    "build": "vite build",
+    "start": "NODE_ENV=production node server.js",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "aplayer": "^1.10.1",
+    "axios": "^1.16.1",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "pinia": "^3.0.4",
+    "universal-cookie": "^8.1.2",
+    "vite-plugin-pwa": "^1.3.0",
+    "vue": "^3.5.34",
+    "vue-router": "^4.6.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.6",
+    "playwright": "^1.60.0",
+    "vite": "^8.0.12"
+  }
+}

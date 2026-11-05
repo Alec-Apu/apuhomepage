@@ -1,0 +1,216 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Style */
+body {
+    background: #333;
+    color: #eee;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+/* Text Area */
+#text {
+    display: block;
+    white-space: pre;
+    outline: none;
+    min-width: 0;
+    padding: 20px;
+    margin: 0;
+    resize: none;
+    flex: 1;
+    background: #121212;
+    color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    font-size: 16px;
+    line-height: 1.5;
+    width: 100%;  /* 使textarea宽度最大化 */
+    height: calc(100vh - 60px);  /* 占满剩余的可用空间，减去顶部和底部的空白 */
+    max-height: calc(100vh - 60px);  /* 防止textarea过大 */
+    overflow-y: auto;  /* 自动滚动 */
+}
+
+/* Dark Mode */
+#text.dark {
+    background: #121212;
+    color: white;
+}
+
+/* Options Panel */
+#options {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 25%;
+    background: #222;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    margin-left: 20px;
+    width: 350px;
+    height: auto;
+    transition: all 0.3s ease;
+}
+
+/* Option Section */
+#options > div {
+    padding: 12px;
+    font-size: 16px;
+    color: #ddd;
+	transition: background-color 0.3s ease, transform 0.2s ease, border-radius 0.2s ease;
+}
+
+#options > div:hover {
+    background-color: #333;
+    transform: scale(1.02); /* 鼠标悬浮时的轻微缩放效果 */
+	border-radius: 12px; /* 添加圆角 */
+}
+
+/* Links */
+a {
+    color: #ff4f9b;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #ff2674;
+}
+
+/* Input Styles */
+input[type="number"], select, input[type="file"], button {
+    padding: 12px 18px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #444;
+    background: #333;
+    color: #eee;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+input[type="number"]:focus, select:focus, input[type="file"]:focus, button:focus {
+    border-color: #ff4f9b;
+    box-shadow: 0 0 5px rgba(255, 79, 155, 0.5);
+}
+
+/* Button Styles */
+button {
+    background-color: #ff4f9b; /* 粉色按钮 */
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 15px;
+}
+
+button:hover {
+    background-color: #ff2674; /* 更深的粉色 */
+    transform: scale(1.05);
+	border-radius: 12px; /* 添加圆角 */
+}
+
+button:active {
+    background-color: #e5005f; /* 点击时的颜色 */
+    transform: scale(0.98);
+	border-radius: 12px; /* 保持圆角 */
+}
+
+/* Input Number */
+input[type="number"] {
+    width: 100%;
+}
+
+/* Character Count */
+#charcount {
+    font-weight: bold;
+    color: #ff4f9b;
+    font-size: 16px;
+}
+
+/* Select Box Styles */
+select {
+    background: #333;
+    color: #eee;
+    border-radius: 8px;
+    padding: 12px;
+    border: 1px solid #444;
+}
+
+select:focus {
+    border-color: #ff4f9b;
+}
+
+/* Small Screen Improvements */
+@media screen and (max-width: 768px) {
+    #options {
+        flex: 0 0 80%;
+        margin-left: 0;
+        margin-top: 20px;
+        width: 100%;
+    }
+
+    #text {
+        width: 100%;
+        margin-top: 20px;
+    }
+}
+
+/* Custom Checkbox Styles */
+input[type="checkbox"] {
+    appearance: none; /* 隐藏默认勾选框 */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #444;
+    border-radius: 4px; /* 圆角 */
+    background-color: #222; /* 默认背景色 */
+    position: relative;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* When the checkbox is checked */
+input[type="checkbox"]:checked {
+    background-color: #ff4f9b; /* 勾选时的淡粉色 */
+    border-color: #ff4f9b;
+}
+
+/* Checkbox Indicator */
+input[type="checkbox"]:checked::before {
+    content: ''; /* 空内容 */
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 16px;
+    height: 16px;
+    border-radius: 2px; /* 圆角效果 */
+    transition: background-color 0.3s ease;
+}
+
+/* Hover Effect */
+input[type="checkbox"]:hover {
+    border-color: #ff4f9b; /* 悬停时改变边框颜色 */
+}
+
+/* Focus Effect */
+input[type="checkbox"]:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 79, 155, 0.5);
+}

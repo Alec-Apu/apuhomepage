@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 - 页面未找到</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0a0a0f;
+    font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    overflow: hidden;
+  }
+
+  /* ── 星空粒子背景 ── */
+  .stars {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+  }
+  .star {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    animation: twinkle var(--dur) ease-in-out infinite;
+    animation-delay: var(--delay);
+    opacity: 0;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.15; transform: scale(1); }
+    50%      { opacity: 0.9;  transform: scale(1.8); }
+  }
+
+  /* ── 柔光光晕 ── */
+  .glow {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+  }
+  .glow-1 {
+    width: 500px; height: 500px;
+    background: rgba(99, 102, 241, 0.12);
+    top: -15%; left: -10%;
+    animation: drift 20s ease-in-out infinite;
+  }
+  .glow-2 {
+    width: 400px; height: 400px;
+    background: rgba(168, 85, 247, 0.10);
+    bottom: -20%; right: -8%;
+    animation: drift 25s ease-in-out infinite reverse;
+  }
+  @keyframes drift {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33%      { transform: translate(60px, -40px) scale(1.15); }
+    66%      { transform: translate(-30px, 30px) scale(0.9); }
+  }
+
+  /* ── 主容器 ── */
+  .container {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  /* ── 404 数字 ── */
+  .glitch-404 {
+    font-size: clamp(8rem, 20vw, 14rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: #fff;
+    position: relative;
+    animation: float 6s ease-in-out infinite;
+  }
+  .glitch-404::before,
+  .glitch-404::after {
+    content: '404';
+    position: absolute;
+    inset: 0;
+    color: #fff;
+  }
+  .glitch-404::before {
+    animation: glitch-1 2.5s infinite;
+    clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+    color: #6366f1;
+  }
+  .glitch-404::after {
+    animation: glitch-2 3s infinite;
+    clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+    color: #a855f7;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-12px); }
+  }
+  @keyframes glitch-1 {
+    0%, 100% { transform: none; opacity: 0.8; }
+    7%       { transform: translate(-3px, 2px); opacity: 1; }
+    10%      { transform: none; opacity: 0.8; }
+    27%      { transform: translate(-2px, -1px); opacity: 1; }
+    30%      { transform: none; opacity: 0.8; }
+  }
+  @keyframes glitch-2 {
+    0%, 100% { transform: none; opacity: 0.8; }
+    15%      { transform: translate(3px, -2px); opacity: 1; }
+    18%      { transform: none; opacity: 0.8; }
+    42%      { transform: translate(2px, 1px); opacity: 1; }
+    45%      { transform: none; opacity: 0.8; }
+  }
+
+  /* ── 渐变分割线 ── */
+  .divider {
+    width: 80px;
+    height: 3px;
+    margin: 0.8rem auto 1.6rem;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #6366f1, #a855f7, #ec4899);
+  }
+
+  /* ── 标题 ── */
+  .title {
+    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+    font-weight: 400;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+  }
+
+  /* ── 描述 ── */
+  .desc {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.7;
+    max-width: 420px;
+    margin: 0 auto 2.5rem;
+  }
+
+  /* ── 按钮组 ── */
+  .actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.8rem;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    letter-spacing: 0.02em;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: #fff;
+    box-shadow: 0 4px 24px rgba(99, 102, 241, 0.35);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 35px rgba(99, 102, 241, 0.5);
+  }
+  .btn-ghost {
+    background: rgba(255,255,255,0.05);
+    color: rgba(255,255,255,0.75);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .btn-ghost:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.2);
+    color: #fff;
+  }
+
+  /* ── 底部装饰线 ── */
+  .footer-line {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.15);
+    letter-spacing: 0.15em;
+  }
+</style>
+</head>
+<body>
+
+<!-- 星空粒子 -->
+<div class="stars" id="stars"></div>
+
+<!-- 背景光晕 -->
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
+
+<!-- 主体 -->
+<div class="container">
+  <div class="glitch-404" data-text="404">404</div>
+  <div class="divider"></div>
+  <div class="title">页面未找到</div>
+  <p class="desc">抱歉，您访问的页面不存在或已被移除。<br>请检查网址是否正确，或返回首页。</p>
+  <div class="actions">
+    <a href="/" class="btn btn-primary">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      返回首页
+    </a>
+    <a href="javascript:history.back()" class="btn btn-ghost">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      返回上页
+    </a>
+  </div>
+</div>
+
+<div class="footer-line">NSVWEB</div>
+
+<script>
+// 生成星空粒子
+(function() {
+  const starsEl = document.getElementById('stars');
+  const count = 80;
+  const frag = document.createDocumentFragment();
+  for (let i = 0; i < count; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    const size = Math.random() * 2.5 + 1;
+    star.style.cssText = [
+      `width:${size}px; height:${size}px`,
+      `left:${Math.random() * 100}%`,
+      `top:${Math.random() * 100}%`,
+      `--dur:${Math.random() * 3 + 2}s`,
+      `--delay:${Math.random() * 5}s`
+    ].join(';');
+    frag.appendChild(star);
+  }
+  starsEl.appendChild(frag);
+})();
+</script>
+
+</body>
+</html>

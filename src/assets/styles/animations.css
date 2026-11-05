@@ -1,0 +1,38 @@
+/* Fade in with blur */
+@keyframes fade-in {
+  0% { opacity: 0; backdrop-filter: blur(0px); }
+  100% { opacity: 1; backdrop-filter: blur(10px); }
+}
+
+@-webkit-keyframes fade-in {
+  0% { opacity: 0; backdrop-filter: blur(0px); }
+  100% { opacity: 1; backdrop-filter: blur(10px); }
+}
+
+/* Simple fade */
+@keyframes fade {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@-webkit-keyframes fade {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Avatar rotation */
+@keyframes rotate360 {
+  0% { transform: translateZ(0) rotate(0deg); }
+  100% { transform: translateZ(0) rotate(360deg); }
+}
+
+@-webkit-keyframes rotate360 {
+  0% { transform: translateZ(0) rotate(0deg); }
+  100% { transform: translateZ(0) rotate(360deg); }
+}
+
+/* Mobile nav animations */
+@keyframes nav-slide-in {
+  0%   { transform: translateY(100%); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}

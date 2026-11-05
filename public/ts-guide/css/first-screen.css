@@ -1,0 +1,100 @@
+/* 第一屏样式 */
+#first-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+    overflow: hidden;
+}
+
+#first-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+
+
+.first-screen-content {
+    text-align: center;
+    color: white;
+    position: relative;
+    z-index: 2;
+}
+
+/* 半透明黑色遮罩，覆盖在背景与画布之上，内容之下，不阻挡交互 */
+#first-screen::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 1;
+    pointer-events: none;
+    transition: background 0.25s ease;
+}
+
+.first-screen-title {
+    font-size: 3rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+    /* 使用与 logo 相同的脚本体以匹配站点风格 */
+    font-family: 'Pacifico-Regular', cursive !important;
+}
+
+.first-screen-subtitle {
+    font-size: 1rem;
+    margin-bottom: 2.5rem;
+    opacity: 0.9;
+    letter-spacing: 1px;
+}
+
+.first-screen-button {
+    /* 采用 link-card 的毛玻璃外观，但不继承固定高宽 */
+    background: 
+        linear-gradient(rgb(0 0 0 / 5%), rgb(0 0 0 / 5%)) padding-box,
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 0%, transparent 50%, rgba(255, 255, 255, 0.08) 100%) border-box;
+    backdrop-filter: blur(4px);
+    padding: 17px 42px;
+    border-radius: 32px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    -webkit-background-clip: padding-box, border-box;
+    background-clip: padding-box, border-box;
+
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    max-width: 400px; /* 保持按钮不过宽 */
+}
+
+.first-screen-button:hover {
+    background: rgb(255 255 255 / 30%);
+    transition: 0.35s;
+    transform: translateY(-2px);
+}
+
+.first-screen-button:active {
+    transform: translateY(0);
+}
+
+/* 不覆盖原 footer 的样式；只为克隆的 footer 保留最小的显示控制 */
+#first-screen-footer {
+    z-index: 10002; /* 保证克隆在最上层 */
+    display: none; /* 由 JS 控制显示 */
+}
